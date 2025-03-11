@@ -28,12 +28,5 @@ logger.add(
 )
 
 
-logger.add(
-    "linkedin_job_tracker.log",
-    rotation="10 MB",
-    retention="1 week",
-    level="DEBUG",
-    format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} - {message}",
-)
 
 __version__ = "0.1.0"

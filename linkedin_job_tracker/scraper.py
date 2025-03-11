@@ -117,7 +117,7 @@ def get_all_saved_jobs(driver):
         try:
             # Get to page with pagination
             logger.debug(f"Navigating to saved jobs page starting at index {start}")
-            driver.get(f"https://www.linkedin.com/my-items/saved-jobs/?start={start}")
+            driver.get(f"https://www.linkedin.com/my-items/saved-jobs/?cardType=SAVED&start={start}")
             time.sleep(10)
 
             current_jobs, driver = get_jobs_current_page(driver)
@@ -174,15 +174,22 @@ def open_applied_jobs(driver, jobs, applied_jobs_file):
         job_id = job["job_id"]
         company = job["company"]
 
+        if " INTERN" in job["title"].upper():
+            already_applied[job_id] = job
+            logger.debug(f"Match found by job ID: {job['title']} at {job['company']}")
+            continue
+
         if job_id in md_text:
             already_applied[job_id] = job
             logger.debug(f"Match found by job ID: {job['title']} at {job['company']}")
+            continue
 
-        if company in md_text:
+        if company.upper() in md_text.upper():
             already_applied[job_id] = job
             logger.debug(
                 f"Match found by company name: {job['title']} at {job['company']}"
             )
+            continue
 
     logger.info(f"Found {len(already_applied)} matches with already applied jobs")
 
