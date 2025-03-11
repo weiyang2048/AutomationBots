@@ -8,6 +8,7 @@ A Python package for tracking and managing saved LinkedIn jobs. This tool helps 
 - List job details including title, company, location, and URL
 - Check saved jobs against a list of jobs you've already applied to
 - Open matching jobs in new browser tabs for review
+- Comprehensive logging with loguru
 
 ## Installation
 
@@ -83,6 +84,27 @@ open_applied_jobs(driver, jobs, "job_applications.md")
 driver.quit()
 ```
 
+## Logging
+
+The package uses loguru for logging. By default, logs are:
+- Displayed in the console with INFO level and colorized formatting
+- Saved to a file named `linkedin_job_tracker.log` with DEBUG level
+- File logs are automatically rotated when they reach 10 MB
+- Old logs are retained for 1 week
+
+You can customize the logging configuration by accessing the logger:
+
+```python
+from loguru import logger
+
+# Change the console log level
+logger.remove()  # Remove existing handlers
+logger.add(sys.stderr, level="DEBUG")  # Add with new level
+
+# Disable file logging
+logger.configure(handlers=[{"sink": sys.stderr}])
+```
+
 ## Applied Jobs Format
 
 The `job_applications.md` file should be a markdown file tracking your job applications. The tool searches this file for job IDs and company names to identify matches.
@@ -92,6 +114,7 @@ The `job_applications.md` file should be a markdown file tracking your job appli
 - Python 3.6+
 - Selenium 4.0.0+
 - webdriver-manager 3.8.0+
+- loguru 0.6.0+
 - Chrome/Firefox web browser and corresponding webdriver
 
 ## License

@@ -4,4 +4,36 @@ LinkedIn Job Tracker
 A package for tracking and managing saved LinkedIn jobs.
 """
 
-__version__ = "0.1.0" 
+import sys
+from loguru import logger
+
+# Configure loguru
+logger.remove()  # Remove default handler
+logger.add(
+    sys.stderr,
+    format="<green>{time:MM-DD HH:mm}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
+    level="INFO",
+    colorize=True,
+    filter=lambda record: record["level"].name == "INFO",
+)
+# level data do not exist, so we need to create a new level
+logger.level("DATA", no=15, color="<blue>")
+
+logger.add(
+    sys.stdout,
+    level="DATA",
+    format="<blue>{time:MM-DD HH:mm}</blue> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
+    colorize=True,
+    filter=lambda record: record["level"].name == "DATA",
+)
+
+
+logger.add(
+    "linkedin_job_tracker.log",
+    rotation="10 MB",
+    retention="1 week",
+    level="DEBUG",
+    format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} - {message}",
+)
+
+__version__ = "0.1.0"

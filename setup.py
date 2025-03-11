@@ -22,6 +22,7 @@ setup(
     install_requires=[
         "selenium>=4.0.0",
         "webdriver-manager>=3.8.0",
+        "loguru>=0.6.0",
     ],
     entry_points={
         "console_scripts": [
