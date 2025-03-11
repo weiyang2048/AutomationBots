@@ -1,6 +1,7 @@
 """
 LinkedIn job scraper module.
 """
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
@@ -12,11 +13,11 @@ from collections import defaultdict
 def open_linkedin(username, password):
     """
     Log in to LinkedIn with provided credentials.
-    
+
     Args:
         username (str): LinkedIn username/email
         password (str): LinkedIn password
-        
+
     Returns:
         webdriver: Selenium webdriver instance with active LinkedIn session
     """
@@ -40,25 +41,24 @@ def open_linkedin(username, password):
 def go_to_saved_jobs(driver):
     """
     Navigate to saved jobs page.
-    
+
     Args:
         driver (webdriver): Selenium webdriver instance
-        
+
     Returns:
         webdriver: Updated Selenium webdriver instance
     """
     driver.get("https://www.linkedin.com/my-items/saved-jobs/")
     time.sleep(5)  # Allow the page to load
-    return driver
 
 
 def get_jobs_current_page(driver):
     """
     Extract job information from the current saved jobs page.
-    
+
     Args:
         driver (webdriver): Selenium webdriver instance
-        
+
     Returns:
         tuple: (list of job dictionaries, webdriver instance)
     """
@@ -87,10 +87,10 @@ def get_jobs_current_page(driver):
 def get_all_saved_jobs(driver):
     """
     Extract all saved jobs by paginating through all pages.
-    
+
     Args:
         driver (webdriver): Selenium webdriver instance
-        
+
     Returns:
         tuple: (list of all job dictionaries, webdriver instance)
     """
@@ -122,12 +122,12 @@ def get_all_saved_jobs(driver):
 def open_applied_jobs(driver, jobs, applied_jobs_file):
     """
     Open jobs in new tabs that match already applied jobs.
-    
+
     Args:
         driver (webdriver): Selenium webdriver instance
         jobs (list): List of job dictionaries
         applied_jobs_file (str): Path to markdown file tracking applied jobs
-        
+
     Returns:
         None
     """
@@ -135,12 +135,12 @@ def open_applied_jobs(driver, jobs, applied_jobs_file):
         text = f.read()
     # Convert the lines to markdown
     if "# Additional Companies" in text:
-        md_text = text[:text.index("# Additional Companies")]
+        md_text = text[: text.index("# Additional Companies")]
     else:
         md_text = text
-        
+
     already_applied = defaultdict(dict)
-    
+
     for job in jobs:
         job_id = job["job_id"]
         company = job["company"]
@@ -150,7 +150,7 @@ def open_applied_jobs(driver, jobs, applied_jobs_file):
 
         if company in md_text:
             already_applied[job_id] = job
-    
+
     # Open matches in new tabs
     for item in already_applied:
         if len(already_applied[item].keys()) != 0:
@@ -158,4 +158,7 @@ def open_applied_jobs(driver, jobs, applied_jobs_file):
             driver.execute_script(
                 f"window.open('{already_applied[item]['jd_url']}', '_blank');"
             )
-            time.sleep(1) 
+            time.sleep(3)
+            saved_buttons = driver.find_elements(By.CLASS_NAME, "jobs-save-button")
+            saved_buttons[-1].click()
+            time.sleep(1)
