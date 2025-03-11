@@ -158,7 +158,8 @@ def open_applied_jobs(driver, jobs, applied_jobs_file):
             driver.execute_script(
                 f"window.open('{already_applied[item]['jd_url']}', '_blank');"
             )
-            time.sleep(3)
+            time.sleep(5)
+            driver.switch_to.window(driver.window_handles[-1])
             saved_buttons = driver.find_elements(By.CLASS_NAME, "jobs-save-button")
             saved_buttons[-1].click()
             time.sleep(1)
