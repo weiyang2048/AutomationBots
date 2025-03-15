@@ -7,7 +7,7 @@ import os
 import getpass
 import sys
 from loguru import logger
-from linkedin_job_tracker.scraper import (
+from AutomationBots.LinkedInHelper.scraper import (
     open_linkedin,
     go_to_saved_jobs,
     get_all_saved_jobs,
@@ -47,6 +47,17 @@ def main():
     )
 
     args = parser.parse_args()
+    
+    # Update log level if specified
+    if args.log_level:
+        loggers = logger._core.loggers
+        for handler_id in list(loggers.keys()):
+            if loggers[handler_id].name == "stderr":
+                logger.remove(handler_id)
+                logger.add(sys.stderr, level=args.log_level, 
+                      format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>")
+                break
+
     # Prompt for credentials if not provided
     username = args.username or input("LinkedIn username/email: ")
     password = args.password or getpass.getpass("LinkedIn password: ")

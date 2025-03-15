@@ -1,122 +1,125 @@
-# LinkedIn Job Tracker
+# Web Crawler Automation Tools
 
-A Python package for tracking and managing saved LinkedIn jobs. This tool helps you keep track of your saved jobs on LinkedIn, and can check for jobs that you've already applied to.
+A collection of powerful automation tools for web scraping and data collection, with a focus on LinkedIn job tracking.
 
-## Features
+## 🌟 Features
 
-- Scrape all saved jobs from your LinkedIn account
-- List job details including title, company, location, and URL
-- Check saved jobs against a list of jobs you've already applied to
-- Open matching jobs in new browser tabs for review
-- Comprehensive logging with loguru
+### LinkedIn Job Tracker
+- 📋 Automatically scrapes all saved jobs from your LinkedIn account
+- 📊 Provides detailed job information (title, company, location, URLs)
+- ✅ Cross-references saved jobs with your application history
+- 🔗 Opens matching jobs in browser tabs for quick review
+- 📝 Comprehensive logging system for tracking operations
 
-## Installation
+## 🚀 Getting Started
 
-### From GitHub
+### Prerequisites
+- Python 3.6 or higher
+- Chrome or Firefox web browser
+- Internet connection
 
+### Installation
+
+**Option 1: Install from GitHub**
 ```bash
-pip install git+https://github.com/your-username/web_crawler.git
+pip install git+https://github.com/weiyang2048/AutomationBots.git
 ```
 
-### Local Development Installation
-
-Clone the repository:
-
+**Option 2: Local Development Setup**
 ```bash
-git clone https://github.com/your-username/web_crawler.git
-cd web_crawler
-```
+# Clone the repository
+git clone https://github.com/weiyang2048/AutomationBots.git
+cd AutomationBots
 
-Install dependencies:
-
-```bash
+# Install dependencies
 pip install -r requirements.txt
-```
 
-Install in development mode:
-
-```bash
+# Install in development mode
 pip install -e .
 ```
 
-## Usage
+## 💻 Usage
 
 ### Command Line Interface
 
-After installation, you can use the command line interface:
-
 ```bash
 # List all saved jobs
-linkedin-job-tracker --username your-email@example.com
+LinkedInTracker --username your-email@example.com
 
-# Check saved jobs against already applied jobs
-linkedin-job-tracker --username your-email@example.com --action check-applied --applied-jobs-file path/to/job_applications.md
+# Check against applied jobs
+LinkedInTracker --username your-email@example.com --action check-applied --applied-jobs-file path/to/job_applications.md
 ```
 
-If you don't provide username/password, the tool will prompt you for them.
+Note: If credentials are not provided, you'll be prompted to enter them securely.
 
 ### Python API
 
-You can also use the package in your Python code:
-
 ```python
-from linkedin_job_tracker.scraper import (
+from AutomationBots.LinkedInTracker.scraper import (
     open_linkedin,
     get_all_saved_jobs,
     open_applied_jobs
 )
 
-# Log in to LinkedIn
+# Initialize and login
 driver = open_linkedin("your-email@example.com", "your-password")
 
-# Get all saved jobs
+# Fetch saved jobs
 jobs, driver = get_all_saved_jobs(driver)
 
-# Print job details
+# Process job data
 for job in jobs:
     print(f"{job['title']} at {job['company']} ({job['location']})")
     print(f"URL: {job['jd_url']}")
 
-# Check against applied jobs
+# Compare with applied jobs
 open_applied_jobs(driver, jobs, "job_applications.md")
 
-# Don't forget to close the browser
+# Clean up
 driver.quit()
 ```
 
-## Logging
+## 📝 Logging System
 
-The package uses loguru for logging. By default, logs are:
-- Displayed in the console with INFO level and colorized formatting
-- Saved to a file named `linkedin_job_tracker.log` with DEBUG level
-- File logs are automatically rotated when they reach 10 MB
-- Old logs are retained for 1 week
+The application uses loguru for robust logging with the following default configuration:
 
-You can customize the logging configuration by accessing the logger:
+- Console output: INFO level with color formatting
+- File output: DEBUG level in `automationbots.log`
+- Automatic log rotation at 10MB
+- One-week log retention
+
+### Customizing Logs
 
 ```python
 from loguru import logger
+import sys
 
-# Change the console log level
-logger.remove()  # Remove existing handlers
-logger.add(sys.stderr, level="DEBUG")  # Add with new level
+# Adjust console logging level
+logger.remove()
+logger.add(sys.stderr, level="DEBUG")
 
 # Disable file logging
 logger.configure(handlers=[{"sink": sys.stderr}])
 ```
 
-## Applied Jobs Format
+## 📄 Job Applications Tracking
 
-The `job_applications.md` file should be a markdown file tracking your job applications. The tool searches this file for job IDs and company names to identify matches.
+Create a markdown file (`job_applications.md`) to track your job applications. The tool will search this file for:
+- Job IDs
+- Company names
+- Application status
 
-## Requirements
+## 📦 Dependencies
 
-- Python 3.6+
-- Selenium 4.0.0+
-- webdriver-manager 3.8.0+
-- loguru 0.6.0+
-- Chrome/Firefox web browser and corresponding webdriver
+- Selenium (≥4.0.0)
+- webdriver-manager (≥3.8.0)
+- loguru (≥0.6.0)
+- Chrome/Firefox WebDriver
 
-## License
+## 📜 License
 
-MIT
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
