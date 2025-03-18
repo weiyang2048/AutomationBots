@@ -1,46 +1,26 @@
-# Web Crawler Automation Tools
+# AutomationBots
 
-A collection of powerful automation tools for web scraping and data collection, with a focus on LinkedIn job tracking.
+A collection of powerful automation tools for web scraping and data collection.
 
-## 🌟 Features
+## 📦 Modules
 
 ### LinkedIn Job Tracker
-- 📋 Automatically scrapes all saved jobs from your LinkedIn account
-- 📊 Provides detailed job information (title, company, location, URLs)
-- ✅ Cross-references saved jobs with your application history
-- 🔗 Opens matching jobs in browser tabs for quick review
-- 📝 Comprehensive logging system for tracking operations
 
-## 🚀 Getting Started
+#### Overview
 
-### Prerequisites
-- Python 3.6 or higher
-- Chrome or Firefox web browser
-- Internet connection
+The `LinkedIn Job Tracker` module automates the process of scraping saved jobs from your LinkedIn account, providing detailed job information, and cross-referencing with your application history.
 
-### Installation
+#### Features
 
-**Option 1: Install from GitHub**
-```bash
-pip install git+https://github.com/weiyang2048/AutomationBots.git
-```
+- Automatically scrapes all saved jobs from LinkedIn.
+- Provides detailed job information (title, company, location, URLs).
+- Cross-references saved jobs with your application history.
+- Opens matching jobs in browser tabs for quick review.
+- Comprehensive logging system for tracking operations.
 
-**Option 2: Local Development Setup**
-```bash
-# Clone the repository
-git clone https://github.com/weiyang2048/AutomationBots.git
-cd AutomationBots
+#### Usage
 
-# Install dependencies
-pip install -r requirements.txt
-
-# Install in development mode
-pip install -e .
-```
-
-## 💻 Usage
-
-### Command Line Interface
+**Command Line Interface**
 
 ```bash
 # List all saved jobs
@@ -50,9 +30,7 @@ LinkedInTracker --username your-email@example.com
 LinkedInTracker --username your-email@example.com --action check-applied --applied-jobs-file path/to/job_applications.md
 ```
 
-Note: If credentials are not provided, you'll be prompted to enter them securely.
-
-### Python API
+**Python API**
 
 ```python
 from AutomationBots.LinkedInTracker.scraper import (
@@ -79,47 +57,36 @@ open_applied_jobs(driver, jobs, "job_applications.md")
 driver.quit()
 ```
 
+### ArXivSearcher
+
+#### Overview
+
+The `ArXivSearcher` module is designed to scrape arXiv for research papers based on user input and download the PDFs.
+
+#### Features
+
+- Dynamic folder creation for storing downloaded PDFs.
+- Cleans paper titles for use as filenames.
+- Provides user feedback through message boxes for various scenarios.
+
+#### Usage
+
+1. Run the script:
+   ```bash
+   python ArXivSearcher.py
+   ```
+2. Enter the search query when prompted in the dialog box.
+3. The script will download the PDFs of the search results into a folder in your Downloads directory.
+
 ## 📝 Logging System
 
-The application uses loguru for robust logging with the following default configuration:
-
-- Console output: INFO level with color formatting
-- File output: DEBUG level in `automationbots.log`
-- Automatic log rotation at 10MB
-- One-week log retention
-
-### Customizing Logs
-
-```python
-from loguru import logger
-import sys
-
-# Adjust console logging level
-logger.remove()
-logger.add(sys.stderr, level="DEBUG")
-
-# Disable file logging
-logger.configure(handlers=[{"sink": sys.stderr}])
-```
-
-## 📄 Job Applications Tracking
-
-Create a markdown file (`job_applications.md`) to track your job applications. The tool will search this file for:
-- Job IDs
-- Company names
-- Application status
-
-## 📦 Dependencies
-
-- Selenium (≥4.0.0)
-- webdriver-manager (≥3.8.0)
-- loguru (≥0.6.0)
-- Chrome/Firefox WebDriver
+The application uses `loguru` for robust logging with console and file outputs, automatic log rotation, and retention.
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
