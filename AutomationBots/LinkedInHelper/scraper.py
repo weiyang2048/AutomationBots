@@ -10,6 +10,8 @@ import time
 from collections import defaultdict
 import random
 from loguru import logger
+from AutomationBots.SeleniumInitializer import initialize_selenium_driver
+
 
 
 def open_linkedin(username, password):
@@ -23,25 +25,7 @@ def open_linkedin(username, password):
     Returns:
         webdriver: Selenium webdriver instance with active LinkedIn session
     """
-    logger.info("Initializing Chrome driver")
-    # Initialize Chrome with webdriver-manager
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
-
-    # Log in to LinkedIn
-    logger.info("Navigating to LinkedIn login page")
-    driver.get("https://www.linkedin.com/login")
-    username_field = driver.find_element(By.ID, "username")
-    password_field = driver.find_element(By.ID, "password")
-
-    username_field.send_keys(username)
-    password_field.send_keys(password)
-
-    logger.info("Submitting login credentials")
-    driver.find_element(By.XPATH, "//button[@type='submit']").click()
-    time.sleep(20)  # Wait for login to complete
-    logger.info("Login completed")
-    return driver
+    return initialize_selenium_driver(username, password)
 
 
 def go_to_saved_jobs(driver):
@@ -117,7 +101,9 @@ def get_all_saved_jobs(driver):
         try:
             # Get to page with pagination
             logger.debug(f"Navigating to saved jobs page starting at index {start}")
-            driver.get(f"https://www.linkedin.com/my-items/saved-jobs/?cardType=SAVED&start={start}")
+            driver.get(
+                f"https://www.linkedin.com/my-items/saved-jobs/?cardType=SAVED&start={start}"
+            )
             time.sleep(10)
 
             current_jobs, driver = get_jobs_current_page(driver)
