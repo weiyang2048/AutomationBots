@@ -1,0 +1,8 @@
+repos:
+-   repo: https://github.com/srstevenson/nb-clean
+    rev: v3.0.0
+    hooks:
+    -   id: nb-clean
+        args: [--remove-empty-cells, --preserve-cell-metadata]
+        types: [jupyter]
+        additional_dependencies: [nb-clean] 

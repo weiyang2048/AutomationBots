@@ -1,0 +1,2 @@
+pre-commit==3.6.0
+nb-clean==3.0.0 
