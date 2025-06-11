@@ -1,8 +1,14 @@
+# .pre-commit-config.yaml
+# https://github.com/kynan/nbstripout
 repos:
--   repo: https://github.com/srstevenson/nb-clean
-    rev: v3.0.0
-    hooks:
-    -   id: nb-clean
-        args: [--remove-empty-cells, --preserve-cell-metadata]
-        types: [jupyter]
-        additional_dependencies: [nb-clean] 
+- repo: https://github.com/kynan/nbstripout
+  rev: 0.8.1
+  hooks:
+    - id: nbstripout
+
+# - repo: local
+#   hooks:
+#     - id: collapse
+#       name: Run my Python script
+#       entry: python pre_commit_collapse.py
+#       language: system
