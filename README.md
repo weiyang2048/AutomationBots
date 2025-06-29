@@ -1,6 +1,26 @@
 # AutomationBots
 
-A collection of powerful automation tools for web scraping and data collection.
+A collection of powerful automation tools .
+
+# Installation
+```bash
+pip install git+https://github.com/weiyang2048/AutomationBots.git
+```
+
+# CLI
+```bash
+automationbots --help
+```
+
+## random-folder
+```bash
+automationbots random-folder # "path" optional
+automationbots list-folders # "path" optional
+```
+
+
+
+
 
 ## 📦 Modules
 

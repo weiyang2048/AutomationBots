@@ -15,12 +15,14 @@ dependencies = [
     "bs4>=0.0.1",
     "requests>=2.28.1",
     "pre-commit",
+    "click>=8.0.0",
 ]
 
-[project.optional-dependencies]
-dev = [
-    "pre-commit==3.6.0",
-]
+[tool.setuptools.packages]
+find = {}
+
+[project.scripts]
+automationbots = "AutomationBots.cli:cli"
 
 [build-system]
 requires = ["setuptools", "wheel"]

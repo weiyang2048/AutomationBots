@@ -114,3 +114,4 @@ secrets.ini
 # IDE
 .idea/
 .vscode/ 
+uv.lock
