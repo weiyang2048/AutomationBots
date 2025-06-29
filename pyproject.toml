@@ -22,7 +22,7 @@ dependencies = [
 find = {}
 
 [project.scripts]
-automationbots = "AutomationBots.cli:cli"
+automationbots = "cli.cli:cli"
 
 [build-system]
 requires = ["setuptools", "wheel"]

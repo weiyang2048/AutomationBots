@@ -29,7 +29,6 @@ def get_all_subfolders(root_path):
 
     try:
         for root, dirs, files in os.walk(root_path):
-            # Filter out directories named 'Lib'
             dirs[:] = [d for d in dirs if d[0] not in ['.', '_']]
             # Add all directories found in this level
             for dir_name in dirs:
