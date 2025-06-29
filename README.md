@@ -1,42 +1,60 @@
 # AutomationBots
 
-A collection of powerful automation tools .
+A comprehensive collection of automation tools designed to streamline various tasks including job tracking, research paper discovery, and file management.
 
-# Installation
+## Table of Contents
+
+- [AutomationBots](#automationbots)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Command Line Interface](#command-line-interface)
+  - [Modules](#modules)
+    - [LinkedIn Job Tracker](#linkedin-job-tracker)
+      - [Overview](#overview)
+      - [Features](#features)
+      - [Usage](#usage)
+    - [ArXiv Searcher](#arxiv-searcher)
+      - [Overview](#overview-1)
+      - [Features](#features-1)
+      - [Usage](#usage-1)
+    - [Random Folder Opener](#random-folder-opener)
+      - [Overview](#overview-2)
+      - [Usage](#usage-2)
+  - [Logging System](#logging-system)
+  - [License](#license)
+  - [Contributing](#contributing)
+
+## Installation
+
+Install the package directly from GitHub:
+
 ```bash
 pip install git+https://github.com/weiyang2048/AutomationBots.git
 ```
 
-# CLI
+## Command Line Interface
+
+Access the main CLI interface:
+
 ```bash
 automationbots --help
 ```
 
-## random-folder
-```bash
-automationbots random-folder # "path" optional
-automationbots list-folders # "path" optional
-```
-
-
-
-
-
-## 📦 Modules
+## Modules
 
 ### LinkedIn Job Tracker
 
 #### Overview
 
-The `LinkedIn Job Tracker` module automates the process of scraping saved jobs from your LinkedIn account, providing detailed job information, and cross-referencing with your application history.
+The LinkedIn Job Tracker module automates the process of scraping saved jobs from your LinkedIn account, providing detailed job information, and cross-referencing with your application history.
 
 #### Features
 
-- Automatically scrapes all saved jobs from LinkedIn.
-- Provides detailed job information (title, company, location, URLs).
-- Cross-references saved jobs with your application history.
-- Opens matching jobs in browser tabs for quick review.
-- Comprehensive logging system for tracking operations.
+- Automated scraping of all saved jobs from LinkedIn
+- Detailed job information extraction (title, company, location, URLs)
+- Cross-referencing saved jobs with application history
+- Browser tab automation for quick job review
+- Comprehensive logging system for operation tracking
 
 #### Usage
 
@@ -77,17 +95,18 @@ open_applied_jobs(driver, jobs, "job_applications.md")
 driver.quit()
 ```
 
-### ArXivSearcher
+### ArXiv Searcher
 
 #### Overview
 
-The `ArXivSearcher` module is designed to scrape arXiv for research papers based on user input and download the PDFs.
+The ArXiv Searcher module is designed to scrape arXiv for research papers based on user input and download the PDFs automatically.
 
 #### Features
 
-- Dynamic folder creation for storing downloaded PDFs.
-- Cleans paper titles for use as filenames.
-- Provides user feedback through message boxes for various scenarios.
+- Dynamic folder creation for organized PDF storage
+- Automatic paper title cleaning for filename compatibility
+- User-friendly dialog-based interface
+- Batch PDF downloading capabilities
 
 #### Usage
 
@@ -95,18 +114,45 @@ The `ArXivSearcher` module is designed to scrape arXiv for research papers based
    ```bash
    python ArXivSearcher.py
    ```
-2. Enter the search query when prompted in the dialog box.
-3. The script will download the PDFs of the search results into a folder in your Downloads directory.
+2. Enter the search query when prompted in the dialog box
+3. The script will download the PDFs of the search results into a folder in your Downloads directory
 
-## 📝 Logging System
+### Random Folder Opener
 
-The application uses `loguru` for robust logging with console and file outputs, automatic log rotation, and retention.
+#### Overview
 
-## 📜 License
+A utility module for managing and opening random folders from a specified directory.
+
+#### Usage
+
+```bash
+# Open a random folder from current directory
+automationbots random-folder
+
+# Open a random folder from specified path
+automationbots random-folder "path"
+
+# List all folders in current directory
+automationbots list-folders
+
+# List all folders in specified path
+automationbots list-folders "path"
+```
+
+## Logging System
+
+The application uses `loguru` for robust logging with the following features:
+
+- Console and file outputs
+- Automatic log rotation
+- Configurable retention policies
+- Structured logging for better debugging
+
+## License
 
 This project is licensed under the MIT License.
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 

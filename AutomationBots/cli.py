@@ -21,7 +21,7 @@ from random_folder_opener import get_all_subfolders, open_folder
 @click.version_option(version="0.1.0", prog_name="AutomationBots")
 def cli():
     """
-    🚀 AutomationBots CLI
+    AutomationBots CLI
     
     A collection of automation tools accessible via command line.
     """
@@ -39,7 +39,7 @@ def cli():
 @click.option('--verbose', '-v', is_flag=True, help='Enable verbose output')
 def random_folder(path, count, exclude, include, max_depth, dry_run, verbose):
     """
-    🎲 Open random subfolder(s) from a directory
+    Open random 🎲 subfolder(s) from a directory
     
     Opens one or more random subfolders from the specified directory.
     If no directory is specified, uses the current working directory.
@@ -108,12 +108,6 @@ def random_folder(path, count, exclude, include, max_depth, dry_run, verbose):
     for i, folder in enumerate(selected_folders, 1):
         click.echo(f"🎲 Opening folder {i}/{actual_count}: {folder}")
         
-        if open_folder(folder):
-            click.echo(f"✅ Successfully opened: {folder}")
-        else:
-            click.echo(f"❌ Failed to open: {folder}")
-
-
 @cli.command()
 @click.argument('path', type=click.Path(exists=True, file_okay=False, dir_okay=True), 
                 default=os.getcwd(), required=False)
@@ -177,5 +171,5 @@ def info():
     click.echo("For help with a specific command, use: automationbots <command> --help")
 
 
-if __name__ == '__main__':
-    cli() 
+if __name__ == "__main__":
+    cli()
