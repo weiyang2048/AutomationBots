@@ -26,10 +26,10 @@ def get_all_subfolders(root_path):
         list: List of all subfolder paths
     """
     subfolders = []
-
+    exclude = ['venv']
     try:
         for root, dirs, files in os.walk(root_path):
-            dirs[:] = [d for d in dirs if d[0] not in ['.', '_']]
+            dirs[:] = [d for d in dirs if d[0] not in ['.', '_'] and d not in exclude]
             # Add all directories found in this level
             for dir_name in dirs:
                 full_path = os.path.join(root, dir_name)
