@@ -107,6 +107,7 @@ def random_folder(path, count, exclude, include, max_depth, dry_run, verbose):
     # Open the selected folders
     for i, folder in enumerate(selected_folders, 1):
         click.echo(f"🎲 Opening folder {i}/{actual_count}: {folder}")
+        open_folder(folder)
         
 @cli.command()
 @click.argument('path', type=click.Path(exists=True, file_okay=False, dir_okay=True), 

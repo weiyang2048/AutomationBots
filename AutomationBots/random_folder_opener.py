@@ -92,6 +92,9 @@ def main():
 
     print(f"🎲 Randomly selected: {random_folder}")
 
+    # Open the random folder
+    open_folder(random_folder)
+
 
 if __name__ == "__main__":
     main()
